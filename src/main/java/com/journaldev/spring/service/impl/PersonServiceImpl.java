@@ -11,12 +11,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.journaldev.spring.model.Person;
 
-@Service
 public class PersonServiceImpl implements PersonService {
 
 	private static final Logger logger = LoggerFactory.getLogger(PersonServiceImpl.class);
@@ -136,7 +133,6 @@ public class PersonServiceImpl implements PersonService {
 	@Override
 	public void removePerson(int id) throws ServiceException {
 		logger.debug("removePerson(int id)");
-		Person person= null;
 		Session session = null;
 		Transaction tx = null;
 		try {

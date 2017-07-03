@@ -4,10 +4,8 @@ import com.journaldev.spring.controller.exception.ControllerException;
 import com.journaldev.spring.model.Menu;
 import com.journaldev.spring.model.Person;
 import com.journaldev.spring.service.exception.ServiceException;
-import com.journaldev.spring.service.exception.ServiceFactoryException;
 import com.journaldev.spring.service.factory.ServiceFactory;
 import com.journaldev.spring.views.ConsoleReader;
-import com.journaldev.spring.views.MainView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,15 +21,10 @@ public class Controller {
     private ServiceFactory serviceFactory;
 
     public Controller(Menu menu, ServiceFactory serviceFactory) {
-        try {
             logger.debug("конструктор controller");
             this.menu = menu;
             this.serviceFactory = serviceFactory;
-            serviceFactory.openSession();
             logger.info("Session is opened");
-        } catch (ServiceFactoryException e) {
-            MainView.print("ошибка открытия сессии");
-        }
     }
 
     public Menu getMenu() {

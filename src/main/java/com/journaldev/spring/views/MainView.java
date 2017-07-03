@@ -87,11 +87,11 @@ public class MainView {
         controller.perform(Command.DELETE_PERSON, id);
     }
 
-    //протестить данный метод потом
     private void editPerson() throws ControllerException {
         System.out.println("Введите id");
         int id = Integer.parseInt(ConsoleReader.read());
-        Person person = (Person) controller.perform(Command.GET_PERSON, id);
+        Person person = new Person();
+        person.setId(id);
         System.out.println("Введите имя");
         person.setName(ConsoleReader.read());
         System.out.println("Введите страну");

@@ -1,18 +1,9 @@
 package com.journaldev.spring.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.ListIndexBase;
 
-/**
- * Entity bean with JPA annotations
- * Hibernate provides JPA implementation
- * @author pankaj
- *
- */
+import javax.persistence.*;
+
 @Entity
 @Table(name="Person", schema = "test")
 public class Person {
@@ -21,9 +12,13 @@ public class Person {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
+
+	@Basic
+	@Column(name = "name")
 	private String name;
-	
+
+	@Basic
+	@Column(name = "country")
 	private String country;
 
 	public int getId() {

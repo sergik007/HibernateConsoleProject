@@ -16,8 +16,6 @@ import java.util.EnumSet;
  */
 public class Main1 {
     public static void main(String[] args) {
-        //ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-
         MainView mainView = new MainView(new Controller(new Menu(
                 EnumSet.of(Command.ADD_PERSON,Command.DELETE_PERSON,
                 Command.EDIT_PERSON, Command.GET_ALL_PERSONS,
