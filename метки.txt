@@ -1,0 +1,4 @@
+в hibernate.cfg.xml должно быть св-во:
+<property name="current_session_context_class">thread</property>
+
+на основе этого свойства в сервисе юзаем метод getCurrentSession()

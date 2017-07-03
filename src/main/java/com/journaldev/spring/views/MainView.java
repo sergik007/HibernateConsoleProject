@@ -56,20 +56,23 @@ public class MainView {
             }
         } catch (ControllerException e) {
             ConsoleReader.closeInputStream();
-            logger.error("ошибка ",e);
+            logger.error("ошибка ", e);
         }
 
     }
-    private void getAllPersons() throws ControllerException{
-        List<Person> persons = (List<Person>)controller.perform(Command.GET_ALL_PERSONS);
+
+    private void getAllPersons() throws ControllerException {
+        List<Person> persons = (List<Person>) controller.perform(Command.GET_ALL_PERSONS);
         persons.forEach(System.out::println);
     }
-    private void getPerson() throws ControllerException{
+
+    private void getPerson() throws ControllerException {
         System.out.println("Введите id");
         int id = Integer.parseInt(ConsoleReader.read());
         controller.perform(Command.GET_PERSON, id);
     }
-    private void addPerson() throws ControllerException{
+
+    private void addPerson() throws ControllerException {
         Person person = new Person();
         System.out.println("Введите name");
         person.setName(ConsoleReader.read());
@@ -77,14 +80,15 @@ public class MainView {
         person.setCountry(ConsoleReader.read());
         controller.perform(Command.ADD_PERSON, person);
     }
-    private void deletePerson() throws ControllerException{
+
+    private void deletePerson() throws ControllerException {
         System.out.println("Введите id");
         int id = Integer.parseInt(ConsoleReader.read());
         controller.perform(Command.DELETE_PERSON, id);
     }
 
     //протестить данный метод потом
-    private void editPerson() throws ControllerException{
+    private void editPerson() throws ControllerException {
         System.out.println("Введите id");
         int id = Integer.parseInt(ConsoleReader.read());
         Person person = (Person) controller.perform(Command.GET_PERSON, id);
@@ -92,7 +96,7 @@ public class MainView {
         person.setName(ConsoleReader.read());
         System.out.println("Введите страну");
         person.setCountry(ConsoleReader.read());
-       controller.perform(Command.EDIT_PERSON, id);
+        controller.perform(Command.EDIT_PERSON, person);
     }
 
     public static void print(String s) {

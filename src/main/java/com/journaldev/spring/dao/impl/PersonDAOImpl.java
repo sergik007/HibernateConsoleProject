@@ -30,12 +30,11 @@ public class PersonDAOImpl implements PersonDAO {
     public void addPerson(Person p) throws DAOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.persist(p);
-
     }
 
     @Override
     public void updatePerson(Person p) throws DAOException {
-        Session  session = this.sessionFactory.openSession();
+        Session  session = this.sessionFactory.getCurrentSession();
         session.update(p);
     }
 
@@ -63,10 +62,9 @@ public class PersonDAOImpl implements PersonDAO {
     public void removePerson(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Person p = (Person) session.load(Person.class, new Integer(id));
-        if (null != p) {
+        if (p != null) {
             session.delete(p);
         }
         logger.info("Person deleted successfully, person details=" + p);
     }
-
 }

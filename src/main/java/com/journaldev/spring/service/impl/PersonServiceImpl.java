@@ -35,77 +35,125 @@ public class PersonServiceImpl implements PersonService {
 
 
 	@Override
-	@Transactional
 	public void addPerson(Person p) throws ServiceException{
 		logger.debug("Service.addPerson(Person p)");
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Session session = null;
 		Transaction tx = null;
 		try {
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
 			tx = session.beginTransaction();
 			this.daoFactory.getPersonDAO().addPerson(p);
 			tx.commit();
 			logger.info("Person saved successfully, Person Details="+p);
 		} catch (DAOException e) {
-			tx.rollback();
 			logger.error("ошибка addPerson(Person p)");
+			if (tx != null) {
+				tx.rollback();
+			}
 			throw new ServiceException(e);
+		}finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 	}
 
 	@Override
-	@Transactional
 	public void updatePerson(Person p) throws ServiceException{
+		logger.debug("updatePerson(Person p)");
+		Session session = null;
+		Transaction tx = null;
 		try {
-			logger.debug("updatePerson(Person p)");
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			tx = session.beginTransaction();
 			this.daoFactory.getPersonDAO().updatePerson(p);
+			tx.commit();
+			logger.info("update person successfully");
 		} catch (DAOException e) {
 			logger.error("ошибка PersonService.updatePerson(Person p)");
+			if (tx != null) {
+				tx.rollback();
+			}
 			throw new ServiceException(e);
+		}finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
-
 	}
 
 	@Override
-	@Transactional
 	public List<Person> listPersons() throws ServiceException{
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession()
+		logger.debug("listPersons()");
+		Session session = null;
 		List<Person> people = null;
 		Transaction tx = null;
 		try {
-			logger.debug("listPersons()");
-
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			tx = session.beginTransaction();
 			people= this.daoFactory.getPersonDAO().listPersons();
+			tx.commit();
 		} catch (DAOException e) {
 			logger.error("ошибка PersonService.updatePerson(Person p)");
+			if (tx != null) {
+				tx.rollback();
+			}
 			throw new ServiceException(e);
+		}finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return people;
 	}
 
 	@Override
-	@Transactional
 	public Person getPersonById(int id) throws ServiceException{
+		logger.debug("getPersonById(int id)");
+		Session session = null;
+		Transaction tx = null;
 		Person person= null;
 		try {
-			logger.debug("getPersonById(int id)");
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			tx = session.beginTransaction();
 			person =this.daoFactory.getPersonDAO().getPersonById(id);
+			tx.commit();
+			logger.info("getPersonById successfully");
 		} catch (DAOException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
 			logger.error("ошибка PersonService.updatePerson(Person p)");
 			throw new ServiceException(e);
+		}finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return person;
 	}
 
 	@Override
-	@Transactional
 	public void removePerson(int id) throws ServiceException {
+		logger.debug("removePerson(int id)");
 		Person person= null;
+		Session session = null;
+		Transaction tx = null;
 		try {
-			logger.debug("removePerson(int id)");
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			tx = session.beginTransaction();
 			this.daoFactory.getPersonDAO().removePerson(id);
+			tx.commit();
 		} catch (DAOException e) {
 			logger.error("ошибка PersonService.updatePerson(Person p)");
+			if (tx != null) {
+				tx.rollback();
+			}
 			throw new ServiceException(e);
+		}finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 	}
 }
