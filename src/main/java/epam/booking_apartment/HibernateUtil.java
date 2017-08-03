@@ -19,9 +19,11 @@ public class HibernateUtil {
                 .applySettings(configuration.getProperties()).build();
         SESSION_FACTORY = configuration.buildSessionFactory(serviceRegistry);
     }
+
     public static SessionFactory getSessionFactory() {
         return SESSION_FACTORY;
     }
+
     public static void shutDown() {
         SESSION_FACTORY.close();
     }

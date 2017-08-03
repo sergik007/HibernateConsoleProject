@@ -2,3 +2,5 @@
 <property name="current_session_context_class">thread</property>
 
 на основе этого свойства в сервисе юзаем метод getCurrentSession()
+Он создаёт сесси. при первом вызове и закрывает её при коммите транхакции.
+Т.о. lazy-initialization при данном пожходе использовать нельзя ( не уверен)
