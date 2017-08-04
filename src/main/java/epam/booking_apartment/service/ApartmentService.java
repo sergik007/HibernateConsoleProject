@@ -15,6 +15,6 @@ public interface ApartmentService {
 
     Apartment getApartmentById(Long id) throws ServiceException;
 
-    void removeApartment(Long id) throws ServiceException;
+    void deleteApartment(Apartment apartment) throws ServiceException;
 
 }

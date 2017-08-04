@@ -19,7 +19,6 @@ import java.io.IOException;
 
 public class MyController extends HttpServlet {
     private static final String COMMAND = "command";
-    private static final Logger logger = LoggerFactory.getLogger(MyController.class);
 
     @Override
     public void destroy() {
@@ -40,13 +39,7 @@ public class MyController extends HttpServlet {
     }
 
     private String processRequest(HttpServletRequest request, HttpServletResponse response) {
-        String uri = request.getRequestURI();
-        ICommand command = CommandRepository.getCommand(uri);
-
-
-        System.out.println(request.getRequestURI());
-        String commandParameter = request.getParameter(COMMAND);
-       // ICommand command = CommandRepository.getCommand(commandParameter);
+        ICommand command= (ICommand) request.getAttribute("command");
         return command.execute(request, response);
     }
 

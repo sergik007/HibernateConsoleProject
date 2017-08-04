@@ -15,8 +15,8 @@
         <property name="hibernate.connection.useUnicode">true</property>
         <property name="hibernate.connection.characterEncoding">UTF-8</property>
         <property name="hibernate.connection.charSet">UTF-8</property>
+        <!--It used ti create the table in the database automatically-->
         <!--<property name="hbm2ddl.auto">create</property>-->
-
         <mapping resource="epam/booking_apartment/model/Apartment.hbm.xml"/>
     </session-factory>
 
