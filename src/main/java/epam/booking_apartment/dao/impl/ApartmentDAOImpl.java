@@ -7,7 +7,6 @@ import epam.booking_apartment.model.Apartment;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,8 +15,6 @@ import java.util.List;
 public class ApartmentDAOImpl extends AbstractDao<Long, Apartment> implements ApartmentDAO {
 
 
-    @Autowired
-    private SessionFactory sessionFactory;
 
     @Override
     public void addApartment(Apartment p) throws HibernateException {
@@ -32,7 +29,7 @@ public class ApartmentDAOImpl extends AbstractDao<Long, Apartment> implements Ap
     @SuppressWarnings("unchecked")
     @Override
     public List<Apartment> getAllApartments() throws HibernateException {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         List<Apartment> personsList = session.createCriteria(Apartment.class).list();
         return personsList;
     }

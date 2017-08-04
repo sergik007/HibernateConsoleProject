@@ -29,6 +29,13 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<!--Google-JSON-->
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+		</dependency>
 		<!--Spring-->
 		<dependency>
 			<groupId>org.springframework</groupId>

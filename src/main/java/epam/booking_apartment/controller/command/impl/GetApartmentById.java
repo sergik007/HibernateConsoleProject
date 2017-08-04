@@ -8,19 +8,21 @@ import epam.booking_apartment.service.impl.ApartmentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
-public class GetAllApartment implements ICommand {
+public class GetApartmentById implements ICommand {
+    private static final String regexId = "//D";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         ApartmentService service = new ApartmentServiceImpl();
+        String pathInfo = request.getPathInfo();
+        Long id = Long.valueOf(pathInfo.replaceAll(regexId, ""));
         try {
-            List<Apartment> apartmentList= service.getAllApartments();
-            request.setAttribute("apartmentList",apartmentList);
+            Apartment apartment = service.getApartmentById(id);
+            request.setAttribute("apartment", apartment);
         } catch (ServiceException e) {
-            System.err.println("ошибка");
+            System.out.println("ошибка");
         }
-        return "/WEB-INF/view/apartments.jsp";
+        return "/WEB-INF/view/apartment.jsp";
     }
 }

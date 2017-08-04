@@ -1,13 +1,13 @@
 package epam.booking_apartment.service.impl;
 
-import epam.booking_apartment.dao.ApartmentDAO;
 import epam.booking_apartment.HibernateUtil;
+import epam.booking_apartment.dao.ApartmentDAO;
+import epam.booking_apartment.dao.impl.ApartmentDAOImpl;
 import epam.booking_apartment.model.Apartment;
 import epam.booking_apartment.service.ApartmentService;
 import epam.booking_apartment.service.exception.ServiceException;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +19,8 @@ public class ApartmentServiceImpl implements ApartmentService {
         return HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
     }
 
-    @Autowired
-    private ApartmentDAO apartmentDAO;
+    //@Autowired
+    private ApartmentDAO apartmentDAO = new ApartmentDAOImpl();
 
 
     @Override

@@ -1,10 +1,8 @@
 package epam.booking_apartment.controller.servlet;
 
-import epam.booking_apartment.controller.command.CommandRepository;
 import epam.booking_apartment.HibernateUtil;
 import epam.booking_apartment.controller.command.ICommand;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import epam.booking_apartment.controller.command.impl.RedirectRequest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,6 +38,9 @@ public class MyController extends HttpServlet {
 
     private String processRequest(HttpServletRequest request, HttpServletResponse response) {
         ICommand command= (ICommand) request.getAttribute("command");
+        if (command == null) {
+            command = new RedirectRequest();
+        }
         return command.execute(request, response);
     }
 

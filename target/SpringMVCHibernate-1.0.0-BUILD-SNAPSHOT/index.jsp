@@ -12,7 +12,11 @@
     <title>Booking Hotel</title>
 </head>
 <body>
-<a href="/apartment">Get all apartments</a><br/>
-<a href="/apartment/no-booking">Get no booked apartment</a>
+<a href="controller/apartment">Get all apartments</a><br/>
+<a href="controller/apartment/no-booking">Get no booked apartment</a>
+<form action="controller/apartment/3" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Отправить">
+</form>
 </body>
 </html>

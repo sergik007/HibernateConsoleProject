@@ -6,9 +6,9 @@
     <title>Apartment</title>
 </head>
 <body>
-<c:out value="apartment" />
+<c:out value="${apartment}"/>
 <form method="post" action="controller/apartment/${apartment.id}/delete">
-    <button value="Delete" onclick="confirm('Вы уверены?')"/>
+    <button onclick="confirm('Вы уверены?')">Delete</button>
 </form>
 </body>
 </html>

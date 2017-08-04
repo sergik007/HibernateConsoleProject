@@ -8,8 +8,14 @@
 <body>
 <a href="/index.jsp">Start page</a>
 <br/><br/>
+<table>
 <c:forEach var="apartment" items="${apartmentList}">
-    <c:out value="${apartment}"/><br/>
+    <tr>
+        <td><a href="apartment/${apartment.id}">${apartment.id}</a></td>
+        <td>${apartment.name}</td>
+    </tr><br/>
+    <%--<c:out value="${apartment}"/><br/>--%>
 </c:forEach>
+</table>
 </body>
 </html>
