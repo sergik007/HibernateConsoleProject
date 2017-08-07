@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+    <apartment id="1" name="First Apartment" date="2001-01-01"/>
+    <apartment id="2" name="Second Apartment" date="2002-02-02"/>
+    <apartment id="3" name="Third Apartment" date="2003-03-03"/>
+</dataset>
