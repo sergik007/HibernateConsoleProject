@@ -73,16 +73,21 @@ public class ApartmentServiceImpl implements ApartmentService {
     @Override
     public Apartment getApartmentById(Long id) throws ServiceException {
         Apartment apartment = null;
-        Transaction tx = null;
-        try {
-            tx = beginTransaction();
-            apartment = apartmentDAO.getApartmentById(id);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
+
+        if (id == null) {
+            throw new ServiceException("Apartment id is nullable");
+        } else {
+            Transaction tx = null;
+            try {
+                tx = beginTransaction();
+                apartment = apartmentDAO.getApartmentById(id);
+                tx.commit();
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                throw new ServiceException(e);
             }
-            throw new ServiceException(e);
         }
         return apartment;
     }

@@ -36,7 +36,6 @@ public class ConfigTest {
 
     @Bean
     public ApartmentDAO apartmentDAO() {
-
         return new ApartmentDAOImpl();
     }
     @Bean
