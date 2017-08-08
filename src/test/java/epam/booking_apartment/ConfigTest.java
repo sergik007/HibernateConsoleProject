@@ -4,15 +4,16 @@ import epam.booking_apartment.dao.ApartmentDAO;
 import epam.booking_apartment.dao.impl.ApartmentDAOImpl;
 import epam.booking_apartment.service.ApartmentService;
 import epam.booking_apartment.service.impl.ApartmentServiceImpl;
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * Created by Siarhei_Kalashynski on 8/7/2017.
@@ -22,8 +23,8 @@ import javax.sql.DataSource;
 @PropertySource("classpath:db-test.properties")
 public class ConfigTest {
 
-    @Value("db.connection.class")
-    private String connectionClass;
+    @Value("db.connection.className")
+    private String connectionClassName;
 
     @Value("db.connection.username")
     private String connectionUsername;
@@ -33,6 +34,15 @@ public class ConfigTest {
 
     @Value("db.connection.url")
     private String connectionUrl;
+
+    @Value("hibernate.dialect")
+    private String hibernateDialect;
+
+    @Value("hibernate.show_sql")
+    private String showSql;
+
+    @Value("hibernate.format_sql")
+    private String formatSql;
 
     @Bean
     public ApartmentDAO apartmentDAO() {
@@ -44,7 +54,27 @@ public class ConfigTest {
     }
 
     @Bean
-    public SessionFactory sessionFactory () {
-        return HibernateUtil.getSessionFactory();
+    public DataSource dataSource() {
+        BasicDataSource dataSourse = new BasicDataSource();
+        dataSourse.setUsername(connectionUsername);
+        dataSourse.setPassword(connectionPassword);
+
+        dataSourse.setUrl(connectionUrl);
+        dataSourse.setDriverClassName(connectionClassName);
+        return dataSourse;
+    }
+    @Bean
+    public LocalSessionFactoryBean  sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setHibernateProperties(hibernateProperties());
+        return sessionFactory;
+    }
+    private Properties hibernateProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.show_sql",showSql);
+        properties.setProperty("hibernate.dialect",hibernateDialect);
+        properties.setProperty("hibernate.format_sql",formatSql);
+        return properties;
     }
 }

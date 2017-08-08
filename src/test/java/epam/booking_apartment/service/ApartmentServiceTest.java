@@ -5,16 +5,20 @@ import epam.booking_apartment.dao.ApartmentDAO;
 import epam.booking_apartment.model.Apartment;
 import epam.booking_apartment.service.exception.ServiceException;
 import epam.booking_apartment.service.impl.ApartmentServiceImpl;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+//import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,19 +30,27 @@ import static org.mockito.Mockito.*;
 /**
  * Created by Siarhei_Kalashynski on 8/7/2017.
  */
+@ComponentScan("epam.booking_apartment")
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(classes = ConfigTest.class)
+//@ContextConfiguration(classes = ConfigTest.class)
 public class ApartmentServiceTest {
 
     private static final List<Apartment> TEST_APARTMENT_LIST = Arrays.asList(new Apartment(), new Apartment(), new Apartment());
     private static final Apartment TEST_APARTMENT_OBJECT = new Apartment();
 
+    private static ApplicationContext context;
     @Mock
     private ApartmentDAO apartmentDAO;
 
     @InjectMocks
 //    @Autowired
-    private ApartmentService apartmentService = new ApartmentServiceImpl();
+    private static ApartmentService apartmentService = new ApartmentServiceImpl();
+
+    @BeforeClass
+    public static void initContext() {
+        context = new AnnotationConfigApplicationContext(ConfigTest.class);
+        //apartmentService = context.getBean(ApartmentService.class);
+    }
 
     @Before
     public void setUp() {
@@ -67,5 +79,9 @@ public class ApartmentServiceTest {
     @Test(expected = ServiceException.class)
     public void shouldThrowsIllegalArgumentExceptionFindingNull() throws ServiceException {
         apartmentService.getApartmentById(null);
+    }
+    @AfterClass
+    public static void closeContext() {
+        ((AnnotationConfigApplicationContext)context).close();
     }
 }

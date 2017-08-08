@@ -15,6 +15,7 @@
 		<mysql.connector.version>5.1.38</mysql.connector.version>
 		<java.version>1.8</java.version>
 		<mockito.version>1.9.5</mockito.version>
+		<dbunit.version>1.3.0</dbunit.version>
 	</properties>
 	<build>
 		<plugins>
@@ -31,7 +32,6 @@
 	</build>
 	<dependencies>
 		<!--Google-JSON-->
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -51,6 +51,16 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- Hibernate -->
@@ -74,7 +84,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -83,10 +93,18 @@
 			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<!--apache-commons-->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!--DBUNIT-->
+		<dependency>
+			<groupId>com.github.springtestdbunit</groupId>
+			<artifactId>spring-test-dbunit</artifactId>
+			<version>${dbunit.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<!--Logging-->
 		<dependency>
