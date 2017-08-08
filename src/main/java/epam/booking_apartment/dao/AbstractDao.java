@@ -1,9 +1,9 @@
 package epam.booking_apartment.dao;
 
-import epam.booking_apartment.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -15,8 +15,8 @@ public abstract class AbstractDao <PK extends Serializable, T>{
         this.persistanceClass = (Class) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
     }
 
-//    @Autowired
-    protected SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    @Autowired
+    protected SessionFactory sessionFactory;// = HibernateUtil.getSessionFactory();
 
     protected Session getSession() throws HibernateException{
         return sessionFactory.getCurrentSession();

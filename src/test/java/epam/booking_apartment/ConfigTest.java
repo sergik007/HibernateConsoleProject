@@ -64,7 +64,8 @@ public class ConfigTest {
         return dataSourse;
     }
     @Bean
-    public LocalSessionFactoryBean  sessionFactory() {
+    public LocalSessionFactoryBean sessionFactory() {
+        //return HibernateUtil.getSessionFactory();
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setHibernateProperties(hibernateProperties());
@@ -73,8 +74,9 @@ public class ConfigTest {
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.show_sql",showSql);
-        properties.setProperty("hibernate.dialect",hibernateDialect);
+        properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty("hibernate.format_sql",formatSql);
+        properties.setProperty("hibernate.current_session_context_class", "thread");
         return properties;
     }
 }

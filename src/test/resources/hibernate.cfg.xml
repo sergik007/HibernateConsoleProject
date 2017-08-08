@@ -19,6 +19,4 @@
         <!--<property name="hbm2ddl.auto">create</property>-->
         <mapping resource="epam/booking_apartment/model/Apartment.hbm.xml"/>
     </session-factory>
-
 </hibernate-configuration>
-
